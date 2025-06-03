@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         nameCourseInput.setText("")
         contactInput.setText("")
 
-        Toast.makeText(this, "Dados Salvos", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Dados Salvos" + person.toString(), Toast.LENGTH_SHORT).show()
     }
 
     fun limpar(view: View){

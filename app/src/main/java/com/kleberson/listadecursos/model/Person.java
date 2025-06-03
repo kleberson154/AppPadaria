@@ -28,4 +28,12 @@ public class Person {
     public String getContact() {
         return contact;
     }
+
+    @Override
+    public String toString() {
+        return "Primeiro Nome: '" + firstName + '\'' +
+                ", Sobrenome: '" + lastName + '\'' +
+                ", Curso: '" + course + '\'' +
+                ", Contato: '" + contact + '\'';
+    }
 }
