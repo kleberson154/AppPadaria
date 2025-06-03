@@ -1,31 +1,18 @@
-package com.kleberson.listadecursos.model;
+package com.kleberson.listadecursos.model
 
-public class Person {
-    private String firstName;
-    private String lastName;
-    private String course;
-    private String contact;
+class Person {
+    var firstName: String = ""
+    var  lastName: String = ""
+    var  course: String = ""
+    var  contact: String = ""
 
-    public Person(String firstName, String lastName, String course, String contact) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.course = course;
-        this.contact = contact;
+    class Person(var firstName: String, var lastName: String, var course: String, var contact: String) {
+
     }
 
-    public String getFirstName() {
-        return firstName;
+    override fun toString(): String {
+        return "Usuario Salvo: $firstName $lastName, Curso: $course, Contato: $contact"
     }
 
-    public String getLastName() {
-        return lastName;
-    }
 
-    public String getCourse() {
-        return course;
-    }
-
-    public String getContact() {
-        return contact;
-    }
 }
