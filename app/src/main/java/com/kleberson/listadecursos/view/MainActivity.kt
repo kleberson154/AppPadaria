@@ -1,17 +1,14 @@
 package com.kleberson.listadecursos.view
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.kleberson.listadecursos.R
-import com.kleberson.listadecursos.model.Person
+import com.kleberson.listadecursos.controller.PersonController
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,58 +22,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun salvar(view: View){
+    fun salvar(view: View) {
         val firstNameInput = findViewById<EditText>(R.id.firstNameInput)
         val lastNameInput = findViewById<EditText>(R.id.lastNameInput)
         val nameCourseInput = findViewById<EditText>(R.id.nameCourseInput)
         val contactInput = findViewById<EditText>(R.id.contactInput)
-        val person = Person(firstNameInput.text.toString(),
-            lastNameInput.text.toString(),
-            nameCourseInput.text.toString(),
-            contactInput.text.toString())
-        savePreferences(person)
 
-        firstNameInput.setText("")
-        lastNameInput.setText("")
-        nameCourseInput.setText("")
-        contactInput.setText("")
-
-        Toast.makeText(this, "Dados Salvos", Toast.LENGTH_SHORT).show()
+        val personController = PersonController(this)
+        personController.salvar(view, firstNameInput, lastNameInput, nameCourseInput, contactInput)
     }
 
-    fun limpar(view: View){
+    fun limpar(view: View) {
         val firstNameInput = findViewById<EditText>(R.id.firstNameInput)
         val lastNameInput = findViewById<EditText>(R.id.lastNameInput)
         val nameCourseInput = findViewById<EditText>(R.id.nameCourseInput)
         val contactInput = findViewById<EditText>(R.id.contactInput)
 
-        firstNameInput.setText("")
-        lastNameInput.setText("")
-        nameCourseInput.setText("")
-        contactInput.setText("")
-        clearPreferences()
+        val personController = PersonController(this)
+        personController.limpar(view, firstNameInput, lastNameInput, nameCourseInput, contactInput)
     }
 
     fun finalizar(view: View) {
-        Toast.makeText(this, "Volte Sempre", Toast.LENGTH_SHORT).show()
-        finish()
+        val personController = PersonController(this)
+        personController.finalizar(view)
     }
-
-    fun savePreferences(person: Person) {
-        val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("firstName", person.firstName.toString())
-        editor.putString("lastName", person.lastName.toString())
-        editor.putString("nameCourse", person.course.toString())
-        editor.putString("contact", person.contact.toString())
-        editor.apply()
-    }
-
-    fun clearPreferences() {
-        val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
-    }
-
 }
