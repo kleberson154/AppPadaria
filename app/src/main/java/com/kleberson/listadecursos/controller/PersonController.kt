@@ -50,10 +50,10 @@ class PersonController(private val context: Context) {
     private fun savePreferences(person: Person) {
         val sharedPreferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("firstName", person.getFirstName())
-        editor.putString("lastName", person.getLastName())
-        editor.putString("nameCourse", person.getCourse())
-        editor.putString("contact", person.getContact())
+        editor.putString("firstName", person.firstName)
+        editor.putString("lastName", person.lastName)
+        editor.putString("nameCourse", person.course)
+        editor.putString("contact", person.contact)
         editor.apply()
     }
 }
