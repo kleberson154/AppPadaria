@@ -13,8 +13,6 @@ import com.kleberson.listadecursos.R
 import com.kleberson.listadecursos.controller.PersonController
 
 class MainActivity : AppCompatActivity() {
-
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val firstNameInput = findViewById<EditText>(R.id.firstNameInput)
         val lastNameInput = findViewById<EditText>(R.id.lastNameInput)
         val nameCourseInput = findViewById<EditText>(R.id.nameCourseInput)
@@ -50,6 +49,5 @@ class MainActivity : AppCompatActivity() {
             personController.toString()
             personController.finalizar(view)
         })
-
     }
 }
