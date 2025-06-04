@@ -72,38 +72,35 @@
         app:layout_constraintTop_toBottomOf="@+id/nameCourseInput" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_Limpar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginBottom="204dp"
         android:backgroundTint="#1E76CE"
-        android:onClick="limpar"
         android:text="@string/btn_limpar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@id/button_Salvar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_Salvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="204dp"
         android:backgroundTint="#1E76CE"
-        android:onClick="salvar"
         android:text="@string/btn_salvar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_Finalizar"
         android:layout_width="309dp"
         android:layout_height="49dp"
         android:layout_marginBottom="112dp"
         android:backgroundTint="#1E76CE"
-        android:onClick="finalizar"
         android:text="@string/btn_finalizar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
