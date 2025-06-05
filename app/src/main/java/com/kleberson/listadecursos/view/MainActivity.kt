@@ -2,7 +2,6 @@ package com.kleberson.listadecursos.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -31,23 +30,28 @@ class MainActivity : AppCompatActivity() {
         val buttonSalvar = findViewById<Button>(R.id.button_Salvar)
         val buttonLimpar = findViewById<Button>(R.id.button_Limpar)
         val buttonFinalizar = findViewById<Button>(R.id.button_Finalizar)
+        val personController = PersonController(this)
 
-        buttonSalvar.setOnClickListener(View.OnClickListener { view ->
-            val personController = PersonController(this)
-            personController.toString()
-            personController.salvar(view, firstNameInput, lastNameInput, nameCourseInput, contactInput)
-        })
+        val person = personController.getPreferences()
 
-        buttonLimpar.setOnClickListener(View.OnClickListener { view ->
-            val personController = PersonController(this)
-            personController.toString()
-            personController.limpar(view, firstNameInput, lastNameInput, nameCourseInput, contactInput)
-        })
+        firstNameInput.setText(person.firstName)
+        lastNameInput.setText(person.lastName)
+        nameCourseInput.setText(person.course)
+        contactInput.setText(person.contact)
 
-        buttonFinalizar.setOnClickListener(View.OnClickListener { view ->
-            val personController = PersonController(this)
+        buttonSalvar.setOnClickListener {
             personController.toString()
-            personController.finalizar(view)
-        })
+            personController.salvar(firstNameInput, lastNameInput, nameCourseInput, contactInput)
+        }
+
+        buttonLimpar.setOnClickListener {
+            personController.toString()
+            personController.limpar(firstNameInput, lastNameInput, nameCourseInput, contactInput)
+        }
+
+        buttonFinalizar.setOnClickListener {
+            personController.toString()
+            personController.finalizar()
+        }
     }
 }
