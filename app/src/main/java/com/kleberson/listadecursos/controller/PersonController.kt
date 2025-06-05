@@ -2,7 +2,6 @@ package com.kleberson.listadecursos.controller
 
 import android.content.Context
 import android.util.Log
-import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,7 @@ class PersonController(private val context: Context) {
         return super.toString()
     }
 
-    fun salvar(view: View, firstNameInput: EditText, lastNameInput: EditText, nameCourseInput: EditText, contactInput: EditText) {
+    fun salvar(firstNameInput: EditText, lastNameInput: EditText, nameCourseInput: EditText, contactInput: EditText) {
         val person = Person(
             firstNameInput.text.toString(),
             lastNameInput.text.toString(),
@@ -32,7 +31,7 @@ class PersonController(private val context: Context) {
         Log.d("MVC_controller", "Dados salvos: ${person.toString()}")
     }
 
-    fun limpar(view: View, firstNameInput: EditText, lastNameInput: EditText, nameCourseInput: EditText, contactInput: EditText) {
+    fun limpar(firstNameInput: EditText, lastNameInput: EditText, nameCourseInput: EditText, contactInput: EditText) {
         firstNameInput.setText("")
         lastNameInput.setText("")
         nameCourseInput.setText("")
@@ -41,7 +40,7 @@ class PersonController(private val context: Context) {
         Log.d("MVC_controller", "Dados limpos")
     }
 
-    fun finalizar(view: View) {
+    fun finalizar() {
         Toast.makeText(context, "Volte Sempre", Toast.LENGTH_SHORT).show()
         if (context is AppCompatActivity) {
             context.finish()
@@ -66,5 +65,13 @@ class PersonController(private val context: Context) {
         editor.apply()
     }
 
-
+    fun getPreferences(): Person {
+        val sharedPreferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        return Person(
+            sharedPreferences.getString("firstName", "") ?: "",
+            sharedPreferences.getString("lastName", "") ?: "",
+            sharedPreferences.getString("nameCourse", "") ?: "",
+            sharedPreferences.getString("contact", "") ?: ""
+        )
+    }
 }
