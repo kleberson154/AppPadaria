@@ -2,8 +2,10 @@ package com.kleberson.listadecursos.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,30 +25,36 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val courses = arrayOf("Selecione o curso", "Android", "Java", "Python", "JavaScript", "C++")
+
         val firstNameInput = findViewById<EditText>(R.id.firstNameInput)
         val lastNameInput = findViewById<EditText>(R.id.lastNameInput)
-        val nameCourseInput = findViewById<EditText>(R.id.nameCourseInput)
+        val courseSpinner = findViewById<Spinner>(R.id.spinnerCurso)
         val contactInput = findViewById<EditText>(R.id.contactInput)
         val buttonSalvar = findViewById<Button>(R.id.button_Salvar)
         val buttonLimpar = findViewById<Button>(R.id.button_Limpar)
         val buttonFinalizar = findViewById<Button>(R.id.button_Finalizar)
         val personController = PersonController(this)
 
+        courseSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courses).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
         val person = personController.getPreferences()
 
         firstNameInput.setText(person.firstName)
         lastNameInput.setText(person.lastName)
-        nameCourseInput.setText(person.course)
+        courseSpinner.setSelection(courses.indexOf(person.course))
         contactInput.setText(person.contact)
 
         buttonSalvar.setOnClickListener {
             personController.toString()
-            personController.salvar(firstNameInput, lastNameInput, nameCourseInput, contactInput)
+            personController.salvar(firstNameInput, lastNameInput, courseSpinner, contactInput)
         }
 
         buttonLimpar.setOnClickListener {
             personController.toString()
-            personController.limpar(firstNameInput, lastNameInput, nameCourseInput, contactInput)
+            personController.limpar(firstNameInput, lastNameInput, courseSpinner, contactInput)
         }
 
         buttonFinalizar.setOnClickListener {
