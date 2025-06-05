@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.kleberson.listadecursos.database.Db
 import com.kleberson.listadecursos.model.Person
 
 class PersonController(private val context: Context) {
@@ -15,6 +16,8 @@ class PersonController(private val context: Context) {
     }
 
     fun salvar(firstNameInput: EditText, lastNameInput: EditText, courseSpinner: Spinner, contactInput: EditText) {
+        val db = Db(context, "person.db", null, 1)
+
         val person = Person(
             firstNameInput.text.toString(),
             lastNameInput.text.toString(),
@@ -22,6 +25,12 @@ class PersonController(private val context: Context) {
             contactInput.text.toString()
         )
         savePreferences(person)
+        db.insertPerson(
+            person.firstName,
+            person.lastName,
+            person.course,
+            person.contact
+        )
 
         firstNameInput.setText("")
         lastNameInput.setText("")
@@ -30,6 +39,7 @@ class PersonController(private val context: Context) {
 
         Toast.makeText(context, "Dados Salvos", Toast.LENGTH_SHORT).show()
         Log.d("MVC_controller", "Dados salvos: ${person.toString()}")
+        db.close()
     }
 
     fun limpar(firstNameInput: EditText, lastNameInput: EditText, courseSpinner: Spinner, contactInput: EditText) {
