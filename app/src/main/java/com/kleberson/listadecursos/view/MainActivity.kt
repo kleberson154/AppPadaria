@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.kleberson.listadecursos.R
 import com.kleberson.listadecursos.controller.PersonController
+import com.kleberson.listadecursos.database.Db
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -24,6 +25,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val database = "person.db"
+        val dbVersion = 1
+        val db = Db(this, database, null, dbVersion)
+        db.writableDatabase
 
         val courses = arrayOf("Selecione o curso", "Android", "Java", "Python", "JavaScript", "C++")
 
@@ -60,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         buttonFinalizar.setOnClickListener {
             personController.toString()
             personController.finalizar()
+            db.close()
         }
     }
 }
